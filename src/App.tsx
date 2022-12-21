@@ -1,12 +1,16 @@
 import React from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import PhoneValidation from "./components/PhoneValidation";
+import PhoneValidation from "./page/PhoneValidation";
+import { ThemeProvider } from "@mui/material/styles";
+import theme from "./theme";
 
 function App() {
   return (
     <div className="App">
-      <PhoneValidation />
+      <ThemeProvider theme={theme}>
+        <PhoneValidation />
+      </ThemeProvider>
     </div>
   );
 }
