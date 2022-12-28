@@ -1,5 +1,3 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import PhoneValidation from "./page/PhoneValidation";
 import { ThemeProvider } from "@mui/material/styles";

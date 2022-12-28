@@ -74,7 +74,6 @@ export default function PhoneValidation() {
       } else if (res.phone_number && res.national_format) {
         setResponseData(res);
         onHistoryRecord(res);
-        // cookie.save("historyRecord", res, { path: "/" });
       }
       handleOpen();
     });
@@ -120,7 +119,6 @@ export default function PhoneValidation() {
       ) : (
         <ResultPopUp
           open={open}
-          handleOpen={handleOpen}
           handleClose={handleClose}
           responseData={responseData}
           isError={isError}

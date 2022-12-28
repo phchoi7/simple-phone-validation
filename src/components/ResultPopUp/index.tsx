@@ -19,7 +19,7 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 400,
+  width: { md: 400, xs: 350 },
   bgcolor: "background.paper",
   border: "2px solid #000",
   boxShadow: 24,
@@ -37,26 +37,30 @@ interface responseData {
 }
 
 export default function ResultPopUp(props: {
-  open: any;
+  open: boolean;
   handleClose: any;
-  handleOpen: any;
   responseData?: responseData;
   isError?: boolean;
   errorMsg?: string;
 }) {
-  //   const [open, setOpen] = React.useState(false);
-  const { open, handleClose, handleOpen, responseData, isError, errorMsg } =
-    props;
-  //   const handleOpen = () => setOpen(true);
-  //   const handleClose = () => setOpen(false);
+  const { open, handleClose, responseData, isError, errorMsg } = props;
 
   const ErrorArea = () => {
     return (
       <Box sx={{ justifyContent: "center" }}>
-        <img src={ERROR} width={100} />
-        <Typography id="transition-modal-title" variant="h6" component="h2">
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <img src={ERROR} width={100} alt={"error"} />
+        </Box>
+
+        <Typography
+          id="transition-modal-title"
+          variant="h6"
+          component="h2"
+          sx={{ textAlign: "center" }}
+        >
           {errorMsg}
         </Typography>
+
         <Button variant="contained" onClick={handleClose}>
           Back
         </Button>
@@ -67,8 +71,16 @@ export default function ResultPopUp(props: {
   const ResultArea = () => {
     return (
       <Box sx={{ justifyContent: "center" }}>
-        <img src={CORRECT} width={100} />
-        <Typography id="transition-modal-title" variant="h6" component="h2">
+        <Box sx={{ display: "flex", justifyContent: "center" }}>
+          <img src={CORRECT} width={100} alt={"correct"} />
+        </Box>
+
+        <Typography
+          id="transition-modal-title"
+          variant="h6"
+          component="h2"
+          sx={{ textAlign: "center" }}
+        >
           Your Number is Valid !
         </Typography>
         <List
