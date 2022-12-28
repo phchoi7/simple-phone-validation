@@ -2,15 +2,33 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import Autocomplete from "@mui/material/Autocomplete";
+import { useState } from "react";
 
-export default function AreaFlagSelection() {
+export default function AreaFlagSelection(props: { setSelectCountry: any }) {
+  const { setSelectCountry } = props;
+  function handleInputChange(event: any, value: string) {
+    setSelectCountry(value);
+  }
+
+  const changeHandler = (value: string) => {
+    console.log(value); // value should be here
+  };
+
+  const defaultSelectCountry = () => {
+    const locale = "HK"; // API should define which country user agent
+    return countries.find((option) => option.code === locale);
+  };
+
+  defaultSelectCountry();
   return (
     <Autocomplete
-      id="country-select-demo"
-      sx={{ width: 300 }}
+      id="country-select"
       options={countries}
       autoHighlight
-      getOptionLabel={(option) => option.label}
+      sx={{ width: { md: 200, xs: "100%" }, maxWidth: { md: 200, xs: "100%" } }}
+      defaultValue={defaultSelectCountry()}
+      getOptionLabel={(option) => option.phone}
+      onInputChange={handleInputChange}
       renderOption={(props, option) => (
         <Box
           component="li"
@@ -24,7 +42,7 @@ export default function AreaFlagSelection() {
             srcSet={`https://flagcdn.com/w40/${option.code.toLowerCase()}.png 2x`}
             alt=""
           />
-          {option.label} ({option.code}) +{option.phone}
+          {option.label} ({option.code})
         </Box>
       )}
       renderInput={(params) => (
@@ -32,7 +50,8 @@ export default function AreaFlagSelection() {
           {...params}
           label="Choose a country"
           variant="filled"
-          sx={{ background: "white", maxWidth: 200 }}
+          sx={{ maxWidth: { md: 200, xs: "100%" } }}
+          onChange={(e) => changeHandler(e.target.value)}
           inputProps={{
             ...params.inputProps,
             autoComplete: "new-password", // disable autocomplete and autofill
